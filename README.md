@@ -9,7 +9,7 @@ codelab](https://firebase.google.com/codelabs/ai-genkit-rag).
 If you want to try out an early preview of Data Connect, we have instructions
 below for you to follow!
 
-# Try it out today!
+## Try it out today
 
 We recommend trying this project in IDX since it handles all dependencies for you. You are able to launch this project in IDX and get going testing with only slight configuration required.
 
@@ -28,7 +28,7 @@ We recommend trying this project in IDX since it handles all dependencies for yo
   </picture>
 </a>
 
-## Run the app in Project IDX
+### Run the app in Project IDX
 
 Open the app in Project IDX using the button above.
 
@@ -36,10 +36,10 @@ Open the app in Project IDX using the button above.
 
 1. Next click on the Firebase side bar icon to open the Firebase side bar panel. Click the "Connect to Local PostgreSQL" button to run the Data Connect emulator.
 
-1.  You will need to click into the terminal titled genkit-start and accept the terms of service and install the genkit CLI.
+1. You will need to click into the terminal titled genkit-start and accept the terms of service and install the genkit CLI.
 
 1. Once genkit has started running, close and re-open the web preview.
 
 ### Additional Information
 
-This app is not an officially supported Google Product
+This app is not an officially supported Google Product.
