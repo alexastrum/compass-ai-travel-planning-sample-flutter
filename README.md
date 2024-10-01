@@ -13,7 +13,7 @@ below for you to follow!
 
 We recommend trying this project in IDX since it handles all dependencies for you. You are able to launch this project in IDX and get going testing with only slight configuration required.
 
-<a href="https://idx.google.com/import?url=https%3A%2F%2Fgithub.com%2FFalexastrum%2Fcompass-ai-travel-planning-sample-flutter">
+<a href="https://idx.google.com/import?url=https%3A%2F%2Fgithub.com%2Falexastrum%2Fcompass-ai-travel-planning-sample-flutter">
   <picture>
     <source
       media="(prefers-color-scheme: dark)"
