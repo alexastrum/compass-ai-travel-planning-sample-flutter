@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class QueryClient {
   static Future<Map<String, bool>> hasRequiredInfo(String query) async {
     debugPrint('Checking refinements for trip description');
-    var endpoint = Uri.https(
+    var endpoint = (isHttpsBackend ? Uri.https : Uri.http)(
         // TODO(@nohe427): Use env vars to set this. ==> see config.dart
         backendEndpoint,
         '/textRefinement');

@@ -48,7 +48,7 @@ class Itinerary {
 }
 
 class ItineraryClient {
-  Uri endpoint = Uri.https(
+  Uri endpoint = (isHttpsBackend ? Uri.https : Uri.http)(
     // TODO(@nohe427): Use env vars to set this. ==> see config.dart
     backendEndpoint,
     '/itineraryGenerator2',

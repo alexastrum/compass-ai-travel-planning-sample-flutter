@@ -43,3 +43,64 @@ Open the app in Project IDX using the button above.
 ### Additional Information
 
 This app is not an officially supported Google Product.
+
+## Run the app locally using Nix
+
+WIP, but would look something close to this:
+
+```sh
+nix-shell ./.idx/dev.nix
+```
+
+```sh
+npm run --prefix proxy dev -- --host 0.0.0.0 --port 8080
+```
+
+## Run the app locally (without Nix)
+
+Setup local Postgres on a Linux machine:
+
+```sh
+curl -o local.zip 'https://firebasestorage.googleapis.com/v0/b/yt-rag.appspot.com/o/genkit%2Flocal.zip?alt=media&token=2f1d181d-9eda-4dc1-9ffc-e988f69c26f2'
+unzip local.zip -d .
+```
+
+Then run in different terminals:
+
+### Postgres and Firebase Emulator
+
+Run:
+
+```sh
+rm ./local/postmaster.pid
+postgres -D ./local -k /tmp
+```
+
+or use a remote instance and update your Genkit and Firebase Emulator configs with correct `postgresql://` connection string.
+
+Next click on the Firebase side bar icon to open the Firebase side bar panel. Click the "Start emulator" button to run the Data Connect emulator.
+
+### Flutter
+
+```sh
+flutter run --machine -d web-server --web-hostname 0.0.0.0 --web-port 6789
+```
+
+### Genkit
+
+```sh
+export GOOGLE_GENAI_API_KEY=$YOUR_API_KEY
+cd genkit
+npm i
+npx genkit start
+```
+
+### Web frontend
+
+```sh
+cd proxy
+npm i
+npm run --prefix proxy dev -- --host 0.0.0.0 --port 8080
+```
+
+Open <http://localhost:8080> in your browser.
