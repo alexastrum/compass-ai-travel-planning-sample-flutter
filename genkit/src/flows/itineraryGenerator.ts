@@ -25,7 +25,6 @@ import {
 } from "../common/types";
 import { planItenerary } from "./shared/iteneraryManager";
 import { defineSchema } from "@genkit-ai/core";
-import { geocodeTool, weatherForecastTool } from "../tools";
 
 export const ItineraryInput = defineSchema("ItineraryInput", ItineraryRequest);
 export type ItineraryInput = z.infer<typeof ItineraryInput>;
@@ -76,7 +75,6 @@ export const generateItinerary = async (input: ItineraryInput) => {
     output: {
       schema: ItineraryOutput,
     },
-    tools: [geocodeTool, weatherForecastTool],
   });
   return { itineraries: response.output() || [] };
 };

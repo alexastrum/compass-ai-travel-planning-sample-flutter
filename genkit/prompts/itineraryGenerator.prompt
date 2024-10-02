@@ -10,13 +10,7 @@ Generate 3 itineraries for a tourist planning on traveling to the location speci
 
 Pick 3 activities per day, minimum of 3 day per itinerary (unless otherwise specified in the request).
 
-If not specified the date will be 1 week from now, and must be fetched using the `weatherForecastTool`.
-
-You MUST use the `weatherForecastTool` to get weather data and recommend relevant activities for forecasted weather.
-
 EXAMPLE RESPONSE:
-
-Weather: 50% clouds but hot (day 1), sunnybut cooler (day 2), rain (day 3)
 
 ```json
 [{
