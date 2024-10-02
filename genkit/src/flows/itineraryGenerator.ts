@@ -67,19 +67,6 @@ export const ItineraryOutput = defineSchema(
 export type ItineraryOutput = z.infer<typeof ItineraryOutput>;
 
 export const generateItinerary = async (input: ItineraryInput) => {
-  const context = await retrieve({
-    retriever: placeRetriever,
-    query: {
-      content: [
-        { text: input.request },
-        ...(input.images || []).map((url) => ({ media: { url } })),
-      ],
-    },
-    options: {
-      k: 3,
-    },
-  });
-
   const itinerariesPrompt = await prompt("itineraryGenerator");
   const response = await itinerariesPrompt.generate<
     typeof ItineraryInput,
@@ -89,7 +76,6 @@ export const generateItinerary = async (input: ItineraryInput) => {
     output: {
       schema: ItineraryOutput,
     },
-    context,
     tools: [geocodeTool, weatherForecastTool],
   });
   return { itineraries: response.output() || [] };

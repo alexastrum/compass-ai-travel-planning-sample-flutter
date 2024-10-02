@@ -6,15 +6,13 @@ output:
 
 REQUIREMENTS:
 
-Generate 3 itineraries for a tourist planning on traveling to the location specified based in their REQUEST and provided CONTEXT.
+Generate 3 itineraries for a tourist planning on traveling to the location specified based in their REQUEST.
 
 Pick 3 activities per day, minimum of 3 day per itinerary (unless otherwise specified in the request).
 
 If not specified the date will be 1 week from now, and must be fetched using the `weatherForecastTool`.
 
 You MUST use the `weatherForecastTool` to get weather data and recommend relevant activities for forecasted weather.
-
-If there is something that does not exist within the list of activities, do not include it in your answer.
 
 EXAMPLE RESPONSE:
 
