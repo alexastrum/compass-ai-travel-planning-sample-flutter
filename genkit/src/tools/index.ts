@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { geocodeTool } from "./geocodeTool";
 import { restaurantFinder } from "./restaurantFinder";
+import { weatherForecastTool } from "./weatherForecastTool";
 
-export {restaurantFinder};
+export {restaurantFinder, geocodeTool, weatherForecastTool};
