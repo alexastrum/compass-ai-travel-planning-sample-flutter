@@ -16,8 +16,6 @@ You MUST use the `weatherForecastTool` to get weather data and recommend relevan
 
 If there is something that does not exist within the list of activities, do not include it in your answer.
 
-REQUEST: {{request}}
-
 EXAMPLE RESPONSE:
 
 Weather: 50% clouds but hot (day 1), sunnybut cooler (day 2), rain (day 3)
@@ -114,3 +112,7 @@ Weather: 50% clouds but hot (day 1), sunnybut cooler (day 2), rain (day 3)
     },
     {
 ...
+
+REQUEST: {{request}}
+
+{{#each images}}{{media url=this}}{{/each}}
