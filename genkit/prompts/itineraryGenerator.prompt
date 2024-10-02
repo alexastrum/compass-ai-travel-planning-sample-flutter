@@ -1,0 +1,116 @@
+---
+model: googleai/gemini-1.5-flash-latest
+output:
+  format: json
+---
+
+REQUIREMENTS:
+
+Generate 3 itineraries for a tourist planning on traveling to the location specified based in their REQUEST and provided CONTEXT.
+
+Pick 3 activities per day, minimum of 3 day per itinerary (unless otherwise specified in the request).
+
+If not specified the date will be 1 week from now, and must be fetched using the `weatherForecastTool`.
+
+You MUST use the `weatherForecastTool` to get weather data and recommend relevant activities for forecasted weather.
+
+If there is something that does not exist within the list of activities, do not include it in your answer.
+
+REQUEST: {{request}}
+
+EXAMPLE RESPONSE:
+
+Weather: 50% clouds but hot (day 1), sunnybut cooler (day 2), rain (day 3)
+
+```json
+[{
+      "place": "Bruges",
+      "itineraryName": "Bruges Baroque Beauty: A Charming Medieval Escape",
+      "startDate": "2024-05-15",
+      "endDate": "2024-05-18",
+      "tags": [
+        "Baroque Architecture",
+        "Medieval City",
+        "Belgium",
+        "Romantic",
+        "History"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "date": "2024-05-15",
+          "planForDay": [
+            {
+              "activityRef": "markt-square-exploration",
+              "activityTitle": "Markt Square Marvels",
+              "activityDesc": "Go outdoors to discover Bruges",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_markt-square-exploration.jpg"
+            },
+            {
+              "activityRef": "explore-the-historic-beguinage",
+              "activityTitle": "Beguinage Serenity",
+              "activityDesc": "It's hot, find tranquility in a historic haven",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_explore-the-historic-beguinage.jpg"
+            },
+            {
+              "activityRef": "canal-boat-tour",
+              "activityTitle": "Canal Cruise Delight",
+              "activityDesc": "Cool down and relax on Bruges' waterways",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_canal-boat-tour.jpg"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2024-05-16",
+          "planForDay": [
+            {
+              "activityRef": "groeningemuseum-visit",
+              "activityTitle": "Flemish Art Immersion",
+              "activityDesc": "Rein today, explore Flemish art indoors",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_groeningemuseum-visit.jpg"
+            },
+            {
+              "activityRef": "climb-the-belfry-of-bruges-for-panoramic-views",
+              "activityTitle": "Belfry Panoramic Views",
+              "activityDesc": "Embrace Bruges' skyline from a covered terrace",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_climb-the-belfry-of-bruges-for-panoramic-views.jpg"
+            },
+            {
+              "activityRef": "chocolate-tasting-and-workshop",
+              "activityTitle": "Sweet Indulgence",
+              "activityDesc": "Taste exquisite Belgian chocolate indoors",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_chocolate-tasting-and-workshop.jpg"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2024-05-17",
+          "planForDay": [
+            {
+              "activityRef": "enjoy-a-romantic-evening-canal-cruise",
+              "activityTitle": "Evening Canal Romance",
+              "activityDesc": "Enchanting canal cruise at dusk on a sunny day",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_enjoy-a-romantic-evening-canal-cruise.jpg"
+            },
+            {
+              "activityRef": "horse-drawn-carriage-ride",
+              "activityTitle": "Romantic Carriage Ride",
+              "activityDesc": "A leisurely ride through Bruges",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_horse-drawn-carriage-ride.jpg"
+            },
+            {
+              "activityRef": "minnewater-lake-and-lover-s-bridge-stroll",
+              "activityTitle": "Lover's Bridge Stroll",
+              "activityDesc": "Romance by Minnewater Lake",
+              "imgUrl": "https://storage.googleapis.com/compass-imgs/activities/bruges_minnewater-lake-and-lover-s-bridge-stroll.jpg"
+            }
+          ]
+        }
+      ],
+      "itineraryImageUrl": "https://storage.googleapis.com/tripedia-images/destinations/bruges.jpg",
+      "placeRef": "bruges"
+    },
+    {
+...

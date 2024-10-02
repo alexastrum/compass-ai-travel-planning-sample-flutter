@@ -20,6 +20,85 @@ import { z } from "zod";
 import { placeRetriever } from '../retrievers/placeRetriever';
 import { Destination, ItineraryGeneratorOutput, ItineraryRequest } from '../common/types';
 import { planItenerary } from './shared/iteneraryManager';
+import { defineSchema } from '@genkit-ai/core';
+import { geocodeTool, weatherForecastTool } from '../tools';
+
+export const ItineraryInput = defineSchema('ItineraryInput', ItineraryRequest);
+export type ItineraryInput = z.infer<typeof ItineraryInput>;
+
+export const ItineraryOutput = defineSchema('ItineraryOutput', z.array(z.object({
+  place: z.string(),
+  itineraryName: z.string(),
+  startDate: z.string().describe('YYYY-MM-DD'),
+  endDate: z.string().describe('YYYY-MM-DD'),
+  tags: z.array(z.string()),
+  itinerary: z.array(
+    z.object({
+      day: z.number(),
+      date: z.string(),
+      planForDay: z.array(
+        z.object({
+          activityRef: z.string()
+            .describe('the reference value for the activity - this comes from the available activities JSON. If no value is present use a ref value of `restaurant`.'),
+          activityTitle: z.string(),
+          activityDesc: z.string(),
+          photoUri: z.string().optional(),
+          googleMapsUri: z.string().optional(),
+          imgUrl: z.string().optional(),
+        })
+      )
+    })
+  ),
+  itineraryImageUrl: z.string().optional(),
+  placeRef: z.string().optional(),
+})));
+export type ItineraryOutput = z.infer<typeof ItineraryOutput>;
+
+// export const generateImageDescriptions = async (imageUrls?: string[]) => {
+//   if (!imageUrls || !imageUrls[0]) {
+//     return '';
+//   }
+//   const imageDescriptionPrompt = await prompt('imageDescription');
+//   const result = await imageDescriptionPrompt.generate({
+//     input: { images: imageUrls },
+//   });
+//   return result.text();
+// }
+
+export const generateItinerary = async (input: ItineraryInput) => {
+    const context = await retrieve({
+      retriever: placeRetriever,
+      query: {content: [
+        {text: input.request}, 
+        ...(input.images || []).map(url => ({media: {url}}))
+      ]},
+      options: {
+        k: 3,
+      },
+    });
+
+    const itinerariesPrompt = await prompt('itineraryGenerator');
+    const response = await itinerariesPrompt.generate<typeof ItineraryInput, typeof ItineraryOutput>({
+      input,
+      output: {
+        schema: ItineraryOutput,
+      },
+      context,
+      tools: [geocodeTool, weatherForecastTool],
+    });
+    console.log(response.text());
+    console.log(response.output());
+    return {itineraries: response.output() || []};
+  };
+
+export const itineraryGenerator = defineFlow(
+    {
+      name: 'itineraryGenerator',
+      inputSchema: ItineraryInput,
+      outputSchema: z.object({itineraries:ItineraryOutput}),
+    },
+    generateItinerary
+  );
 
 export const itineraryGenerator2 = defineFlow(
     {
